@@ -1,7 +1,7 @@
 services:
-  postgres:
+  db:
     image: postgres:16
-    container_name: scale-postgres
+    container_name: scale-db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -10,12 +10,12 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./sql/001-schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+      - ./sql/001-schema.sql:/docker-entrypoint-initdb.d/001-schema.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d shop"]
       interval: 3s
       timeout: 3s
-      retries: 20
+      retries: 10
 
 volumes:
   pgdata:
