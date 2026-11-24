@@ -1,7 +1,7 @@
 import express from "express";
 import { config } from "./config.js";
 import productsRouter from "./routes/product.js";
-
+import "./metrics";
 const app = express();
 app.use(express.json());
 app.use(productsRouter);
